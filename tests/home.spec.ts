@@ -18,8 +18,6 @@ test.describe('Verify the leftmenu list', () => {
         //List of the menu items on the site
         const leftMenuList = page.locator('ul.leftmenu li')
 
-        console.log(await leftMenuList.allTextContents())
-
         //Compare the 2 lists
         expect (await leftMenuList.allTextContents()).toEqual(menuItems)   
         
@@ -32,11 +30,10 @@ test.describe('Verify the leftmenu list', () => {
             {href: 'admin.htm'},
         ]
 
-        // TO finish. Figure out syntax how to get into an array
+        // Loop through the links and compare them to each other
         for (const [index, leftMenuList] of expectedLinks.entries()){
             const link = leftMenuList.href
-            console.log(link)
-            console.log(expectedLinks)
+            await expect(link).toEqual(expectedLinks[index].href)
         }
         
     })
